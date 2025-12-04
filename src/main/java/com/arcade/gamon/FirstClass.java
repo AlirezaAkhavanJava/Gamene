@@ -1,14 +1,18 @@
 package com.arcade.gamon;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
 public class FirstClass {
 
+    private final String trump;
 
-    @Bean
+    public FirstClass(String trump) {
+        this.trump = trump;
+    }
+
+    public FirstClass() {
+        this.trump = "CHINA CHINA CHINA!!!";
+    }
+
     public String trump() {
-        return "china ! chian china !!";
+        return trump;
     }
 }
