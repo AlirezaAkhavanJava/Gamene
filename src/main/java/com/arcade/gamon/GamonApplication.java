@@ -10,11 +10,6 @@ public class GamonApplication {
 
         var context = SpringApplication.run(GamonApplication.class, args);
 
-        FirstClass fc = context.getBean("trumpChina" , FirstClass.class);
-        System.out.println(System.lineSeparator());
-        System.out.println("====================" + fc.trump() + "====================");
-
-
         UnitedStates unitedStates = context.getBean(UnitedStates.class);
         System.out.println(unitedStates.whatToDo());
     }
