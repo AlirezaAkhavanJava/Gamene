@@ -6,16 +6,14 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class GamonApplication {
-
     static void main(String[] args) {
+
         var context = SpringApplication.run(GamonApplication.class, args);
-        System.out.println(context.getBean(SomeClass.class).hi());
+
+        FirstClass fc = context.getBean(FirstClass.class);
+        System.out.println(fc.trump());
     }
 
 
-    @Bean
-    public SomeClass someClass() {
-        return new SomeClass();
-    }
 
 }

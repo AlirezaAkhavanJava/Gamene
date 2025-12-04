@@ -4,10 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SomeClass {
+public class FirstClass {
 
-    @Bean("greet")
-    public String hi() {
-        return "RAMBO";
+
+    @Bean
+    public String trump() {
+        return "china ! chian china !!";
     }
 }
