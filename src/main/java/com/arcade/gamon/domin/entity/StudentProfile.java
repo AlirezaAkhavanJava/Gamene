@@ -1,25 +1,28 @@
-package com.arcade.gamon;
+package com.arcade.gamon.domin.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class School {
+@Builder
+public class StudentProfile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    @Column(nullable = false)
+    private String bio;
 
-    @OneToMany(mappedBy = "school")
-    @JsonManagedReference
-    private List<Student> students;
+    @OneToOne
+    @JoinColumn(
+            name = "student_id"
+    )
+    private Student student;
+
 }
