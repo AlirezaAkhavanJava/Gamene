@@ -3,7 +3,6 @@ package com.arcade.gamon.controller;
 import com.arcade.gamon.Service.StudentService;
 import com.arcade.gamon.domin.dto.StudentDto;
 import com.arcade.gamon.domin.dto.StudentResponseDto;
-import com.arcade.gamon.domin.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,18 +23,18 @@ public class StudentController {
     }
 
     @GetMapping("private/all")
-    public List<Student> findAll() {
+    public List<StudentResponseDto> findAll() {
         return studentService.getAll();
     }
 
     @GetMapping("/private/id/{id}")
-    public Student findById(@PathVariable int id) {
+    public StudentResponseDto findById(@PathVariable int id) {
         return studentService.getById(id);
     }
 
     @GetMapping("private/{name}")
-    public List<Student> findByFirstNameContainingIgnoreCase(@PathVariable("name") String firstName) {
-        return studentService.getStudentByFirstName(firstName);
+    public List<StudentResponseDto> findByFirstNameContainingIgnoreCase(@PathVariable("name") String firstName) {
+        return studentService.getStudentsByFirstName(firstName);
     }
 
     @DeleteMapping("private/remove/{id}")
