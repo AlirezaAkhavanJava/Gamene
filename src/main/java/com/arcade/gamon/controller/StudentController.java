@@ -1,9 +1,8 @@
 package com.arcade.gamon.controller;
 
+import com.arcade.gamon.Service.StudentService;
 import com.arcade.gamon.domin.dto.StudentDto;
 import com.arcade.gamon.domin.dto.StudentResponseDto;
-import com.arcade.gamon.domin.entity.School;
-import com.arcade.gamon.repository.StudentRepository;
 import com.arcade.gamon.domin.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,52 +14,34 @@ import java.util.List;
 @RequestMapping("/students/")
 @RequiredArgsConstructor
 public class StudentController {
-    private final StudentRepository studentRepository;
 
-    public Student toStudent(StudentDto dto) {
-        return Student.builder()
-                .firstName(dto.firstName())
-                .lastName(dto.lastName())
-                .email(dto.email())
-                .school(School.builder()
-                        .id(dto.schoolId())
-                        .build())
-                .build();
-    }
-
-    private StudentResponseDto toStudentResponseDto(Student student) {
-        return new StudentResponseDto(
-                student.getFirstName(), student.getLastName(), student.getEmail()
-        );
-    }
+    private final StudentService studentService;
 
 
     @PostMapping("public/new")
     public StudentResponseDto save(@RequestBody StudentDto studentDto) {
-        var student = toStudent(studentDto);
-        var saved = studentRepository.save(student);
-        return toStudentResponseDto(saved);
+        return studentService.saveStudent(studentDto);
     }
 
     @GetMapping("private/all")
     public List<Student> findAll() {
-        return studentRepository.findAll();
+        return studentService.getAll();
     }
 
     @GetMapping("/private/id/{id}")
     public Student findById(@PathVariable int id) {
-        return studentRepository.findById(id).orElse(null);
+        return studentService.getById(id);
     }
 
     @GetMapping("private/{name}")
     public List<Student> findByFirstNameContainingIgnoreCase(@PathVariable("name") String firstName) {
-        return studentRepository.findByFirstNameContainingIgnoreCase(firstName);
+        return studentService.getStudentByFirstName(firstName);
     }
 
     @DeleteMapping("private/remove/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Integer id) {
-        studentRepository.deleteById(id);
+        studentService.removeStudentById(id);
     }
 
 
