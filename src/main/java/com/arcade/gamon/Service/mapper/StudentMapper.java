@@ -11,6 +11,11 @@ public class StudentMapper {
 
     // ******* Maps student dto to the Student Entity *********
     public Student toStudent(StudentDto dto) {
+
+        if (dto == null) {
+            throw new NullPointerException("Student DTO can not be null");
+        }
+
         return Student.builder()
                 .firstName(dto.firstName())
                 .lastName(dto.lastName())

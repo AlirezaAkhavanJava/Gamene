@@ -36,4 +36,10 @@ public class Student {
     @JsonBackReference
     private School school;
 
+    public Student(String jane, String doe, String mail, int age) {
+        this.firstName = jane;
+        this.lastName = doe;
+        this.email = mail;
+        this.age = age;
+    }
 }

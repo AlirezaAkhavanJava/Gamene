@@ -13,9 +13,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
+
     private final StudentRepository studentRepository;
     private final StudentMapper mapper;
 
+    // ================= REGISTER NEW STUDENT=========================
     @Override
     public StudentResponseDto saveStudent(StudentDto studentDto) {
         var student = mapper.toStudent(studentDto);
@@ -23,6 +25,7 @@ public class StudentServiceImpl implements StudentService {
         return mapper.toStudentResponseDto(saved);
     }
 
+    // ================= GET ALL THE STUDENTS ========================
     @Override
     public List<StudentResponseDto> getAll() {
         return studentRepository.findAll().stream()
@@ -30,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
                 .toList();
     }
 
+    // =================== GET STUDENT BY ID ==========================
     @Override
     public StudentResponseDto getById(int id) {
         return studentRepository.findById(id)
@@ -38,6 +42,7 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    // =================== GET STUDENTS BY NAME ========================
     @Override
     public List<StudentResponseDto> getStudentsByFirstName(String firstName) {
         return studentRepository.findByFirstNameContainingIgnoreCase(firstName).stream()
@@ -45,6 +50,7 @@ public class StudentServiceImpl implements StudentService {
                 .toList();
     }
 
+    // =================== REMOVE STUDENT BY ID =======================
     @Override
     public void removeStudentById(Integer id) {
         studentRepository.deleteById(id);
