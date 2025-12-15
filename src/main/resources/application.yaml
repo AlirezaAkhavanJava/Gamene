@@ -5,6 +5,7 @@ spring:
     password: 9908
     driver-class-name: org.postgresql.Driver
 
+
   jpa:
     hibernate:
       ddl-auto: update
